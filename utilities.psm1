@@ -147,17 +147,17 @@ Function Get-GuessedVSVersion {
     }
     
     #Visual Studio 2012
-    if ((Test-Path env:\VS110COMNTOOLS) -and (Test-Path $env:VS110COMNTOOLS)) {
+    if ((Test-Path env:\VS110COMNTOOLS) -and (Test-Path (Join-Path $env:VS110COMNTOOLS "..\..\VC\vcvarsall.bat"))) {
         return '2012'
     }
 
     #Visual Studio 2010
-    if ((Test-Path env:\VS100COMNTOOLS) -and (Test-Path $env:VS100COMNTOOLS)) {
+    if ((Test-Path env:\VS100COMNTOOLS) -and (Test-Path (Join-Path $env:VS100COMNTOOLS "..\..\VC\vcvarsall.bat"))) {
         return '2010'
     }
     
     #Visual Studio 2013
-    if ((Test-Path env:\VS120COMNTOOLS) -and (Test-Path $env:VS120COMNTOOLS)) {
+    if ((Test-Path env:\VS120COMNTOOLS) -and (Test-Path (Join-Path $env:VS120COMNTOOLS "..\..\VC\vcvarsall.bat"))) {
         return '2013'
     }
 
