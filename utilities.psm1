@@ -136,3 +136,30 @@ function Import-VisualStudioVars
         }
     }
 }
+
+#Order: 2010, 2012, WindowsSDK7.1, 2013
+
+Function Get-GuessedVSVersion {
+    
+    #Platform SDK (since it seems to set VS100COMNTOOLS even without Visual Studio 2010 installed)
+    if (Test-Path (Join-Path $env:ProgramFiles "Microsoft SDKs\Windows\v7.1\Bin\setenv.cmd")) {
+        return 'WindowsSDK7.1'
+    }
+    
+    #Visual Studio 2012
+    if ((Test-Path env:\VS110COMNTOOLS) -and (Test-Path $env:VS110COMNTOOLS)) {
+        return '2012'
+    }
+
+    #Visual Studio 2010
+    if ((Test-Path env:\VS100COMNTOOLS) -and (Test-Path $env:VS100COMNTOOLS)) {
+        return '2010'
+    }
+    
+    #Visual Studio 2013
+    if ((Test-Path env:\VS120COMNTOOLS) -and (Test-Path $env:VS120COMNTOOLS)) {
+        return '2013'
+    }
+
+    throw "Can't find any of VS2010-2013 or WindowsSDK7.1."
+}
