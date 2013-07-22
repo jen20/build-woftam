@@ -145,6 +145,13 @@ Function Get-GuessedVSVersion {
     if (Test-Path (Join-Path $env:ProgramFiles "Microsoft SDKs\Windows\v7.1\Bin\setenv.cmd")) {
         return 'WindowsSDK7.1'
     }
+
+    #Visual Studio's, newest versions first
+
+    #Visual Studio 2013
+    if ((Test-Path env:\VS120COMNTOOLS) -and (Test-Path (Join-Path $env:VS120COMNTOOLS "..\..\VC\vcvarsall.bat"))) {
+        return '2013'
+    }
     
     #Visual Studio 2012
     if ((Test-Path env:\VS110COMNTOOLS) -and (Test-Path (Join-Path $env:VS110COMNTOOLS "..\..\VC\vcvarsall.bat"))) {
@@ -154,11 +161,6 @@ Function Get-GuessedVSVersion {
     #Visual Studio 2010
     if ((Test-Path env:\VS100COMNTOOLS) -and (Test-Path (Join-Path $env:VS100COMNTOOLS "..\..\VC\vcvarsall.bat"))) {
         return '2010'
-    }
-    
-    #Visual Studio 2013
-    if ((Test-Path env:\VS120COMNTOOLS) -and (Test-Path (Join-Path $env:VS120COMNTOOLS "..\..\VC\vcvarsall.bat"))) {
-        return '2013'
     }
 
     throw "Can't find any of VS2010-2013 or WindowsSDK7.1."
