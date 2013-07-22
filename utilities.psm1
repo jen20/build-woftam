@@ -83,7 +83,7 @@ function Import-VisualStudioVars
 {
     param
     (
-        [Parameter(Mandatory = $true, Position = 0)][ValidateSet('2010', '2012', 'WindowsSDK7.1')][string]$VisualStudioVersion,
+        [Parameter(Mandatory = $true, Position = 0)][ValidateSet('2010', '2012', '2013', 'WindowsSDK7.1')][string]$VisualStudioVersion,
         [Parameter(Position = 1)][string]$Architecture = 'amd64',
         [Parameter(Position = 2)][string]$Configuration = 'release'
     )
