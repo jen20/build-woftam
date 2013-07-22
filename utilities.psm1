@@ -93,13 +93,18 @@ function Import-VisualStudioVars
         switch ($VisualStudioVersion)
         {
             '2010' {
-                Push-EnvironmentVars
-                Invoke-BatchFile "${env:VS100COMNTOOLS}..\..\VC\vcvarsall.bat" $Architecture -RedirectStdErrToNull $false
+                Push-Environment
+                Invoke-BatchFile (Join-Path $env:VS100COMNTOOLS "..\..\VC\vcvarsall.bat") -Parameters $Architecture -RedirectStdErrToNull $false
             }
  
             '2012' {
-                Push-EnvironmentVars
-                Invoke-BatchFile "${env:VS110COMNTOOLS}..\..\VC\vcvarsall.bat" -Parameters $Architecture -RedirectStdErrToNull $false
+                Push-Environment
+                Invoke-BatchFile (Join-Path $env:VS110COMNTOOLS "..\..\VC\vcvarsall.bat") -Parameters $Architecture -RedirectStdErrToNull $false
+            }
+
+            '2013' {
+                Push-Environment
+                Invoke-BatchFile (Join-Path $env:VS120COMNTOOLS "..\..\VC\vcvarsall.bat") -Parameters $Architecture -RedirectStdErrToNull $false
             }
 
             'WindowsSDK7.1' {
@@ -121,8 +126,8 @@ function Import-VisualStudioVars
                     return
                 }
 
-                Push-EnvironmentVars
-                Invoke-BatchFile "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\setenv.cmd" -Parameters "$configurationParameter $architectureParameter" -RedirectStdErrToNull $true
+                Push-Environment
+                Invoke-BatchFile (Join-Path $env:ProgramFiles "Microsoft SDKs\Windows\v7.1\Bin\setenv.cmd") -Parameters "$configurationParameter $architectureParameter" -RedirectStdErrToNull $true
             }
  
             default {
