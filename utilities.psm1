@@ -23,7 +23,7 @@
 .NOTES
     Author: Lee Holmes (slight modifications by JN)
 #>
-function Invoke-BatchFile
+Function Invoke-BatchFile
 {
     param([string]$Path, [string]$Parameters, [bool]$RedirectStdErrToNull = $false)
 
@@ -79,7 +79,7 @@ function Invoke-BatchFile
 
     Sets up the environment variables for the VS 2012 arm compiler.
 #>
-function Import-VisualStudioVars
+Function Import-VisualStudioVars
 {
     param
     (
@@ -136,8 +136,6 @@ function Import-VisualStudioVars
         }
     }
 }
-
-#Order: 2010, 2012, WindowsSDK7.1, 2013
 
 Function Get-GuessedVSVersion {
     
